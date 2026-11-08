@@ -137,5 +137,14 @@ app.post('/simulate', async (req, res) => {
   }
 });
 
-app.get('/health', (_q, r) => r.send('ok'));
-app.listen(PORT, () => console.log('Simulation server on port ' + PORT));
+app.get('/', (_req, res) => {
+  res.send('SIM Server is running');
+});
+
+app.get('/health', (_req, res) => {
+  res.send('ok');
+});
+
+app.listen(PORT, () => {
+  console.log('Simulation server on port ' + PORT);
+});
