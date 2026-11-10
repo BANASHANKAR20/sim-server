@@ -1,12 +1,14 @@
-FROM node:20-bookworm-slim
+FROM node:20-slim
+
+# Simulators: Icarus Verilog (iverilog + vvp) and GHDL for VHDL
 RUN apt-get update \
- && apt-get install -y --no-install-recommends iverilog ghdl-mcode util-linux \
+ && apt-get install -y --no-install-recommends iverilog ghdl \
  && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev
 COPY server.js ./
-USER node
+
 ENV NODE_ENV=production
-EXPOSE 8080
 CMD ["node", "server.js"]
